@@ -1,0 +1,237 @@
+【start slide】
+
+ [start shape]
+
+     GROUP (6)
+     <pptx.shapes.group.GroupShape object at 0x000001E6325E19B0>
+         [start shape]
+
+             PICTURE (13)
+             <pptx.shapes.picture.Picture object at 0x000001E632B77160>
+             TEXT_BOX (17)
+             <pptx.shapes.autoshape.Shape object at 0x000001E632B772B0>
+             巴啦啦小魔仙，无法无天变？？？
+             TEXT_BOX (17)
+             <pptx.shapes.autoshape.Shape object at 0x000001E632B77390>
+             禹冰瑶
+平平无奇  小医生
+             [end shape]
+
+         PICTURE (13)
+         <pptx.shapes.picture.Picture object at 0x000001E632B77390>
+         [end shape]
+
+【end slide】
+
+ 【start slide】
+
+ [start shape]
+
+     GROUP (6)
+     <pptx.shapes.group.GroupShape object at 0x000001E632B77390>
+         [start shape]
+
+             PICTURE (13)
+             <pptx.shapes.picture.Picture object at 0x000001E632B772B0>
+             TEXT_BOX (17)
+             <pptx.shapes.autoshape.Shape object at 0x000001E632B77358>
+             巴啦啦小魔仙，无法无天变？？？
+             [end shape]
+
+         TEXT_BOX (17)
+         <pptx.shapes.autoshape.Shape object at 0x000001E632B77358>
+         岩易升
+居家好男人  主播
+         PICTURE (13)
+         <pptx.shapes.picture.Picture object at 0x000001E632B77470>
+         [end shape]
+
+【end slide】
+
+ 【start slide】
+
+ [start shape]
+
+     GROUP (6)
+     <pptx.shapes.group.GroupShape object at 0x000001E632B77470>
+         [start shape]
+
+             PICTURE (13)
+             <pptx.shapes.picture.Picture object at 0x000001E632B77358>
+             TEXT_BOX (17)
+             <pptx.shapes.autoshape.Shape object at 0x000001E632B772B0>
+             巴啦啦小魔仙，无法无天变？？？
+             TEXT_BOX (17)
+             <pptx.shapes.autoshape.Shape object at 0x000001E632B77358>
+             温声
+人美声甜     偶像
+             [end shape]
+
+         PICTURE (13)
+         <pptx.shapes.picture.Picture object at 0x000001E632B77358>
+         [end shape]
+
+【end slide】
+
+ 【start slide】
+
+ [start shape]
+
+     GROUP (6)
+     <pptx.shapes.group.GroupShape object at 0x000001E632B77358>
+         [start shape]
+
+             PICTURE (13)
+             <pptx.shapes.picture.Picture object at 0x000001E632B772B0>
+             TEXT_BOX (17)
+             <pptx.shapes.autoshape.Shape object at 0x000001E632B779E8>
+             巴啦啦小魔仙，无法无天变？？？
+             TEXT_BOX (17)
+             <pptx.shapes.autoshape.Shape object at 0x000001E632B772B0>
+             孙天宇
+沉稳干练  老医生
+             [end shape]
+
+         PICTURE (13)
+         <pptx.shapes.picture.Picture object at 0x000001E632B772B0>
+         [end shape]
+
+【end slide】
+
+ 【start slide】
+
+ [start shape]
+
+     GROUP (6)
+     <pptx.shapes.group.GroupShape object at 0x000001E632B772B0>
+         [start shape]
+
+             PICTURE (13)
+             <pptx.shapes.picture.Picture object at 0x000001E632B779E8>
+             TEXT_BOX (17)
+             <pptx.shapes.autoshape.Shape object at 0x000001E632B77A58>
+             巴啦啦小魔仙，无法无天变？？？
+             TEXT_BOX (17)
+             <pptx.shapes.autoshape.Shape object at 0x000001E632B779E8>
+             田天
+性格开朗     保镖
+             [end shape]
+
+         PICTURE (13)
+         <pptx.shapes.picture.Picture object at 0x000001E632B779E8>
+         [end shape]
+
+【end slide】
+
+ 【start slide】
+
+ [start shape]
+
+     GROUP (6)
+     <pptx.shapes.group.GroupShape object at 0x000001E632B779E8>
+         [start shape]
+
+             PICTURE (13)
+             <pptx.shapes.picture.Picture object at 0x000001E632B77A20>
+             TEXT_BOX (17)
+             <pptx.shapes.autoshape.Shape object at 0x000001E632B77588>
+             巴啦啦小魔仙，无法无天变？？？
+             TEXT_BOX (17)
+             <pptx.shapes.autoshape.Shape object at 0x000001E632B77A20>
+             杜昇
+魅力无限     酒保
+             [end shape]
+
+         PICTURE (13)
+         <pptx.shapes.picture.Picture object at 0x000001E632B77A20>
+         [end shape]
+
+【end slide】
+
+ 【start slide】
+
+ [start shape]
+
+     GROUP (6)
+     <pptx.shapes.group.GroupShape object at 0x000001E632B77A20>
+         [start shape]
+
+             PICTURE (13)
+             <pptx.shapes.picture.Picture object at 0x000001E632B77A58>
+             TEXT_BOX (17)
+             <pptx.shapes.autoshape.Shape object at 0x000001E632B77588>
+             巴啦啦小魔仙，无法无天变？？？
+             TEXT_BOX (17)
+             <pptx.shapes.autoshape.Shape object at 0x000001E632B77A58>
+             玛丽安
+骰子咕噜噜 骰娘
+             [end shape]
+
+         PICTURE (13)
+         <pptx.shapes.picture.Picture object at 0x000001E632B77A58>
+         [end shape]
+
+【end slide】
+
+ 【start slide】
+
+ [start shape]
+
+     PICTURE (13)
+     <pptx.shapes.picture.Picture object at 0x000001E632B77A58>
+     TEXT_BOX (17)
+     <pptx.shapes.autoshape.Shape object at 0x000001E632B77588>
+     巴啦啦小魔仙，无法无天变？？？
+     TEXT_BOX (17)
+     <pptx.shapes.autoshape.Shape object at 0x000001E632B77A58>
+     火火
+安心与信赖   KP
+     PICTURE (13)
+     <pptx.shapes.picture.Picture object at 0x000001E632B77588>
+     [end shape]
+
+【end slide】
+
+ 【start slide】
+
+ [start shape]
+
+     GROUP (6)
+     <pptx.shapes.group.GroupShape object at 0x000001E632B77588>
+         [start shape]
+
+             PICTURE (13)
+             <pptx.shapes.picture.Picture object at 0x000001E632B77A58>
+             TEXT_BOX (17)
+             <pptx.shapes.autoshape.Shape object at 0x000001E632B7E390>
+             巴啦啦小魔仙，无法无天变？？？
+             TEXT_BOX (17)
+             <pptx.shapes.autoshape.Shape object at 0x000001E632B77A58>
+             警察
+为人民服务
+             [end shape]
+
+         PICTURE (13)
+         <pptx.shapes.picture.Picture object at 0x000001E632B77A58>
+         [end shape]
+
+【end slide】
+
+ 【start slide】
+
+ [start shape]
+
+     PICTURE (13)
+     <pptx.shapes.picture.Picture object at 0x000001E632B77A58>
+     TEXT_BOX (17)
+     <pptx.shapes.autoshape.Shape object at 0x000001E632B7E8D0>
+     巴啦啦小魔仙，无法无天变？？？
+     TEXT_BOX (17)
+     <pptx.shapes.autoshape.Shape object at 0x000001E632B77A58>
+     肥宅
+我永远爱SH
+     PICTURE (13)
+     <pptx.shapes.picture.Picture object at 0x000001E632B7E8D0>
+     [end shape]
+
+【end slide】
