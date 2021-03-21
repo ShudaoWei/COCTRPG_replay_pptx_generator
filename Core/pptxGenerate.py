@@ -1,5 +1,6 @@
 from pptx import Presentation
 from pptx.enum.shapes import MSO_SHAPE_TYPE
+from pptx.util import Pt
 import TxtToLog as ttl
 import Log
 import copy
@@ -21,14 +22,18 @@ def checkrecursivelyfortext(shpthissetofshapes,textrun,default_replacer=d_replac
                 # print(pre, shape.text)
                 if replace and shape.text.find(default_replacer) !=-1:
                     shape.text = content
+                    for p in shape.text_frame.paragraphs:
+                        p.font.name = '清松手寫體1'
+                        p.font.bold = True
+                        p.font.size = Pt(19)
                     return []
                 textrun.append(shape.text)
     # print(pre, '[end shape]\n')
     return textrun
 
-def copy_slide(pres,pres1,index, content='abcd what?'):
+def copy_slide(pres,pres1,index):
     source = pres.slides[index]
-    blank_slide_layout = pres.slide_layouts[0]
+    blank_slide_layout = pres.slide_layouts[6]
     dest = pres1.slides.add_slide(blank_slide_layout)
 
     for shp in source.shapes:
@@ -64,7 +69,7 @@ def getSlideDictionary(slides,names,dictionary):
         dictionary[name] = findModelSlide(slides, name)
     return dictionary
 
-def generatePreFromLog(scene, dictionary, mods):
+def generatePreFromLog(scene, dictionary, mods, filename):
     if scene.lines:
         new_pre = Presentation()
         new_pre.slide_width = mods.slide_width
@@ -75,7 +80,7 @@ def generatePreFromLog(scene, dictionary, mods):
             #print(checkrecursivelyfortext(mods.slides[index].shapes,[]))
             copy_slide(mods, new_pre, index)
             checkrecursivelyfortext(mods.slides[index].shapes, [],default_replacer=l.content, content=d_replacer, replace=True)
-        new_pre.save('test-01.pptx')
+        new_pre.save(filename + '.pptx')
     else:
         print("台词列表为空。") 
 
@@ -99,12 +104,13 @@ touzi = Log.Dice('骰子')
 
 ttl.saveCharacterList([kp, zhima, qiuqiu, momo, touzi])
 charlist = ttl.getCharacterList()
-filepath = 'C:/Users/44418/Desktop/TRPG/猫幽灵所寻之物[整理第四部分][正片完].txt'
-lines = ttl.readFromTxt(filepath, charlist, txt_format='ldn')
+filepath = 'C:/Users/44418/Desktop/TRPG/猫幽灵所寻之物[后日谈部分编的].txt'
+lines = ttl.readFromTxt(filepath, charlist, txt_format='ldn', encoding='UTF-8')
 scene = Log.Scene(lines, characters = charlist)
 prs = Presentation('cats.pptx')
 dictionary = getSlideDictionary(prs.slides, [c.name for c in charlist], {})
-generatePreFromLog(scene,dictionary,prs)
+name = '后日谈'
+generatePreFromLog(scene,dictionary,prs,name)
 
 
 # for slide in prs.slides:

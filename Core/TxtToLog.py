@@ -49,21 +49,37 @@ def saveCharacterList(l, path=path_characters):
     f.write(jslist)
     f.close()
 
-def readFromTxt(path, charlist, **kwargs):
+def readFromTxt(path, charlist, encoding='GBK', **kwargs):
     lines = []
-    f = open(path, 'r')
+    f = open(path, 'r', encoding=encoding)
     l = f.readline() 
     while l: 
         c, cline = findCharacter(l, charlist, **kwargs)
         if c:
             if cline.replace(' ',''):
-                line = Log.Line(c,cline)
+                add_line =True
+                clines = cline
+                while add_line and l:
+                    if not cline:
+                        clines += l
+                    l = f.readline()
+                    c0, cline = findCharacter(l, charlist, **kwargs)
+                    add_line = not c0
+                line = Log.Line(c,clines)
                 lines.append(line)
             else:
                 l = f.readline()
-                line = Log.Line(c, l)
+                add_line = True
+                clines = ''
+                while add_line and l:
+                    clines += l
+                    l = f.readline()
+                    c0, cline = findCharacter(l, charlist, **kwargs)
+                    add_line = not c0
+                line = Log.Line(c, clines)
                 lines.append(line)
-        l = f.readline()
+        else:
+            l = f.readline()
     return lines
 
 
@@ -128,7 +144,7 @@ def findCharacter(lineString, characters, txt_format='qq', header=default_header
 
 # saveCharacterList([kp, zhima, qiuqiu, momo, touzi])
 # charlist = getCharacterList()
-# filepath = 'C:/Users/44418/Desktop/TRPG/猫幽灵所寻之物[整理第四部分][正片完].txt'
-# lines = readFromTxt(filepath, charlist, txt_format='ldn')
+# filepath = 'C:/Users/44418/Desktop/TRPG/liang.txt'
+# lines = readFromTxt(filepath, charlist, txt_format='ldn', encoding='GBK')
 # scene = Log.Scene(lines, characters=charlist)
-# print(scene.characters)
+# print(scene.lines)
