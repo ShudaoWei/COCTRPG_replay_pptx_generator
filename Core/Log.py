@@ -10,6 +10,7 @@ class Character(object):
     def __init__(self, name, **kw):
         self.name = name
         self.imges = []
+        self.imgdir = ''
         self.is_dice = False
         self.is_NPC = True
         self.is_KP = False
@@ -19,6 +20,7 @@ class Character(object):
         print("创建角色：", name)
 
     def set_imgpath(self, imgdir):
+        self.imgdir = imgdir
         files = os.listdir(imgdir)
         self.imges = [os.path.join(imgdir, f) for f in files]
     
@@ -29,12 +31,13 @@ class Character(object):
         self.qNum = qNum
         print("玩家 " + self.name + " 为守密人。")
 
-    def set_PL(self, qNum):
+    def set_PL(self, qNum, PLid):
         self.is_PL = True
         self.is_NPC = False
         self.__class__ = PL
         self.qNum = qNum
-        print("设置 " + self.name + " 为PL。")
+        self.PLid = PLid
+        print("设置 " + self.PLid + "(角色：" + self.name + ") 为PL。")
 
     def set_dice(self):
         self.is_dice = True
@@ -52,6 +55,17 @@ class Character(object):
         if self.is_NPC:
             result += '  是一名NPC。'
         return result
+    
+    def get_identity(self):
+        if self.is_dice:
+            return '骰子'
+        if self.is_KP:
+            return 'KP'
+        if self.is_NPC:
+            return 'NPC'
+        if self.is_PL:
+            return 'PL'
+        return None
 
     
 
@@ -98,13 +112,14 @@ class PL(Player):
 
 class KP(Player):
     def __init__(self, name, qNum, **kw):
-        Player.__init__(self, name, qNum)
+        Player.__init__(self, 'KP', qNum)
+        self.PLid = name
         self.is_KP = True
         for k, w in kw.items():
             setattr(self, k, w)
         print("玩家 " + name + " 为守密人。\n")
     def __repr__(self):
-        result = Character.__repr__(self) + '  该玩家是KP。'
+        result = Character.__repr__(self) + ' 玩家id： ' + self.PLid + '  该玩家是KP。'
         result += "  qq号：" + str(self.qNum)
         return result
 

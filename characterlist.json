@@ -1,0 +1,50 @@
+[
+    {
+        "__class__": "PL",
+        "__module__": "Core.Log",
+        "name": "999",
+        "imges": [],
+        "imgdir": "",
+        "is_dice": false,
+        "is_NPC": false,
+        "is_KP": false,
+        "is_PL": true,
+        "qNum": "10",
+        "PLid": "111"
+    },
+    {
+        "__class__": "Dice",
+        "__module__": "Core.Log",
+        "name": "666",
+        "imges": [],
+        "imgdir": "",
+        "is_dice": true,
+        "is_NPC": false,
+        "is_KP": false,
+        "is_PL": false
+    },
+    {
+        "__class__": "KP",
+        "__module__": "Core.Log",
+        "name": "KP",
+        "imges": [],
+        "imgdir": "",
+        "is_dice": false,
+        "is_NPC": false,
+        "is_KP": true,
+        "is_PL": false,
+        "qNum": "789",
+        "PLid": "\u706b\u706b"
+    },
+    {
+        "__class__": "Dice",
+        "__module__": "Core.Log",
+        "name": "999999",
+        "imges": [],
+        "imgdir": "",
+        "is_dice": true,
+        "is_NPC": false,
+        "is_KP": false,
+        "is_PL": false
+    }
+]

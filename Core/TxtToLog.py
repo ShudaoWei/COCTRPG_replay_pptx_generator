@@ -1,5 +1,7 @@
-import re
+import sys
 import os
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+import re
 import json
 import Log
 
@@ -13,7 +15,7 @@ re_colored_id = r'<(.*)>'
 
 re_ldn_id = r'\[(.*)\]'
 
-path_characters = 'D://TRPG/TRPG_replay_video_generator/characters.json'
+
 
 # obj2dic的 code 来源：https://blog.csdn.net/u012410724/article/details/51259761
 def object2dict(obj):
@@ -29,8 +31,11 @@ def dict2object(d):
     #convert dict to object
     if'__class__' in d:
         class_name = d.pop('__class__')
+        print('class_name:', class_name)
         module_name = d.pop('__module__')
-        module = __import__(module_name)
+        print('module_name:', module_name)
+        module = __import__(module_name, fromlist=['None'])
+        print('module:', module)
         class_ = getattr(module,class_name)
         args = dict((key, value) for key, value in d.items()) #get args
         inst = class_(**args) #create new instance
@@ -38,23 +43,23 @@ def dict2object(d):
         inst = d
     return inst
 
-def getCharacterList(path=path_characters):
+def getCharacterList(path):
     f = open(path, 'r')
     result = json.loads(f.read(), object_hook = dict2object)
     return result
 
-def saveCharacterList(l, path=path_characters):
+def saveCharacterList(l, path):
     jslist = json.dumps(l, default=object2dict)
     f = open(path, 'w')
     f.write(jslist)
     f.close()
 
-def readFromTxt(path, charlist, encoding='GBK', **kwargs):
+def readFromTxt(path, charlist, char_fp, encoding='GBK', **kwargs):
     lines = []
     f = open(path, 'r', encoding=encoding)
     l = f.readline() 
     while l: 
-        c, cline = findCharacter(l, charlist, **kwargs)
+        c, cline = findCharacter(l, charlist, char_fp, **kwargs)
         if c:
             if cline.replace(' ',''):
                 add_line =True
@@ -63,7 +68,7 @@ def readFromTxt(path, charlist, encoding='GBK', **kwargs):
                     if not cline:
                         clines += l
                     l = f.readline()
-                    c0, cline = findCharacter(l, charlist, **kwargs)
+                    c0, cline = findCharacter(l, charlist, char_fp, **kwargs)
                     add_line = not c0
                 line = Log.Line(c,clines)
                 lines.append(line)
@@ -74,7 +79,7 @@ def readFromTxt(path, charlist, encoding='GBK', **kwargs):
                 while add_line and l:
                     clines += l
                     l = f.readline()
-                    c0, cline = findCharacter(l, charlist, **kwargs)
+                    c0, cline = findCharacter(l, charlist, char_fp, **kwargs)
                     add_line = not c0
                 line = Log.Line(c, clines)
                 lines.append(line)
@@ -92,7 +97,7 @@ def readFromTxt(path, charlist, encoding='GBK', **kwargs):
 #   qq：qq聊天记录导出
 #   colored： 风羽QQ跑团记录染色器 https://logpainter.kokona.tech/
 #   ldn： 朗读女格式
-def findCharacter(lineString, characters, txt_format='qq', header=default_header):
+def findCharacter(lineString, characters, char_fp, txt_format='qq', header=default_header):
     if txt_format=='qq':
         if header != default_header:
             print('无法识别的ID栏，请使用跑团记录着色器：https://logpainter.kokona.tech/ 更新格式。并使用txt_format="colored"')
@@ -115,7 +120,7 @@ def findCharacter(lineString, characters, txt_format='qq', header=default_header
                 return (c, cline)
         character = Log.Character(name)
         characters.append(character)
-        saveCharacterList(characters)
+        saveCharacterList(characters,char_fp)
         return(character, cline)
 
     elif txt_format == 'ldn':
@@ -129,7 +134,7 @@ def findCharacter(lineString, characters, txt_format='qq', header=default_header
                 return (c, cline)
         character = Log.Character(name)
         characters.append(character)
-        saveCharacterList(characters)
+        saveCharacterList(characters,char_fp)
         return(character, cline)
     else:
         print("无法识别的txt_format，请从qq, colored 以及 ldn 中选择。其他格式暂时无法识别。")
