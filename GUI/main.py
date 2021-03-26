@@ -1,92 +1,11 @@
-# import sys
- 
-# #这里我们提供必要的引用。基本控件位于pyqt5.qtwidgets模块中。
-# from PyQt5.QtWidgets import (QWidget, QToolTip, 
-#     QMessageBox, QPushButton, QApplication, QLabel, QLineEdit, 
-#     QTextEdit, QGridLayout)
-# from PyQt5.QtGui import QFont   
-# from PyQt5.QtGui import QIcon
-# from PyQt5.QtCore import QCoreApplication
 
-# class Example(QWidget):
-#     def __init__(self):
-#         super().__init__()
-        
-#         self.initUI() #界面绘制交给InitUi方法
-        
-#         # 需要填写的内容：
-#         # 玩家列表
-#         # 角色列表存储fp
-#         # 读取的文件txt fp
-#         # 读取的txt 格式（qq\ldn\colored）
-#         # 读取的txt 编码格式(尝试获取)
-#         # 读取的ppt模板 fp
-#         # 读取的ppt模板 文本框内容判断
-#         # 生成文件存储路径 fp
-#         # 生成文件存储名称
-#         # 是否修改对话框字体 boolean
-#         # 对话框字体hardcoded
-#         #   -字体、 -字号、 -加粗
-        
-#     def initUI(self):
-
-#         char_fp = QLabel('角色列表存储路径：')
-#         txt_fp = QLabel('txt文件路径：')
-#         review = QLabel('txt文件格式：')
-
-#         #设置窗口的位置和大小
-#         self.setGeometry(100, 100, 550, 450)  
-#         #设置窗口的标题
-#         self.setWindowTitle('Icon')
-#         #设置窗口的图标，引用当前目录下的web.png图片
-#         self.setWindowIcon(QIcon('web.png'))
-        
-#         #这种静态的方法设置一个用于显示工具提示的字体。我们使用10px滑体字体。
-#         QToolTip.setFont(QFont('SansSerif', 10))
-#         #创建一个提示，我们称之为settooltip()方法。我们可以使用丰富的文本格式
-#         # self.setToolTip('This is a <b>QWidget</b> widget')
-
-#          #创建一个PushButton并为他设置一个tooltip
-#         qbtn = QPushButton('关闭窗口', self)
-#         qbtn.clicked.connect(QCoreApplication.instance().quit)
-        
-#         #btn.sizeHint()显示默认尺寸
-#         qbtn.resize(qbtn.sizeHint())
-        
-#         #移动窗口的位置
-#         qbtn.move(50, 50)
-#     def closeEvent(self, event):
-        
-#         # 最后那个QMessage.No是默认选项
-#         reply = QMessageBox.question(self, '确认',
-#             "确定要退出吗？", QMessageBox.Yes | 
-#             QMessageBox.No, QMessageBox.No)
- 
-#         if reply == QMessageBox.Yes:
-#             event.accept()
-#         else:
-#             event.ignore()   
-
-# if __name__ == '__main__':
-#     #每一pyqt5应用程序必须创建一个应用程序对象。sys.argv参数是一个列表，从命令行输入参数。
-#     app = QApplication(sys.argv)
-#     #QWidget部件是pyqt5所有用户界面对象的基类。他为QWidget提供默认构造函数。默认构造函数没有父类。
-#     w = Example()
-#     #设置窗口的标题
-#     w.setWindowTitle('pptx文件log生成器')
-#     #显示在屏幕上
-#     w.show()
-    
-#     #系统exit()方法确保应用程序干净的退出
-#     #的exec_()方法有下划线。因为执行是一个Python关键词。因此，exec_()代替
-#     sys.exit(app.exec_())
 import sys
 import os
-
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from Core import pptxGenerate as pptxg
 from Core import Log
 from Core import TxtToLog as ttl
+from GUI.UI_ECWindow import Ui_EditCharacter as ec_Dialog
+from GUI.UI_MainWindow import Ui_MainWindow as rep_MW
 from PyQt5.QtWidgets import QApplication, QDialog, QFileDialog, QMainWindow, QMessageBox
 from PyQt5 import QtWidgets, QtCore
 from PyQt5.uic import loadUi
@@ -94,11 +13,12 @@ from PyQt5.uic import loadUi
 from pptx import Presentation
 
 # 修改角色信息 副窗口
-class EditCharDialog(QDialog):
+class EditCharDialog(QDialog, ec_Dialog):
     _signal = QtCore.pyqtSignal(Log.Character, int)
     def __init__(self, parent=None):
         super(EditCharDialog,self).__init__(parent)
-        loadUi('./GUI/editCharacter.ui', self)
+        # loadUi('editCharacter.ui', self)
+        self.setupUi(self)
         # 从父窗口读取指定修改的角色序号
         self.index = getattr(parent, 'row_to_edit', 0)
         # 获取原角色参数值
@@ -226,10 +146,11 @@ class EditCharDialog(QDialog):
         return char
 
 # 主窗口
-class MainWindow(QMainWindow):
-    def __init__(self):
-        super(MainWindow,self).__init__()
-        loadUi('./GUI/replay.ui', self)
+class MainWindow(QMainWindow, rep_MW):
+    def __init__(self, parent=None):
+        super(MainWindow,self).__init__(parent)
+        # loadUi('replay.ui', self)
+        self.setupUi(self)
         self.char_list = []
         # 根据当前选择无效填充位置
         self.disable_inputs(self.char_identity_select.currentText())
@@ -240,6 +161,8 @@ class MainWindow(QMainWindow):
         self.model_fp_btn.clicked.connect(self.browsefiles_model_fp)
         self.txt_fp_btn.clicked.connect(self.browsefiles_txt_fp)
         self.save_fp_btn.clicked.connect(self.browsefiles_save_fp)
+
+        # 添加角色按钮实装
         self.add_Character_btn.clicked.connect(self.addlist_char)
         #------------------------------#
         # 角色部分：
@@ -424,6 +347,8 @@ class MainWindow(QMainWindow):
         else:
             msgBox = QMessageBox(QMessageBox.NoIcon, '未实装', '当前功能未实装，敬请期待。')
             msgBox.exec()
+        if self.char_fp_input.text().replace(' ','') == '':
+            self.char_fp_input.setText('./characterlist.json')
         # 保存当前角色列表 （更新json）
         self.save_char_list()
         # 刷新当前表格内的角色列表 （更新显示）
@@ -507,7 +432,7 @@ class MainWindow(QMainWindow):
                 return False
         return True
 
-
+    # 获取txt格式转换为缩写
     def get_txt_format(self):
         if self.txt_format_input.currentText() == '朗读女适配':
             return 'ldn'
@@ -547,11 +472,12 @@ class MainWindow(QMainWindow):
 
         scene = Log.Scene(lines, characters=self.char_list)
         prs = Presentation(model_ppt_fp)
+        print('新建Presentation成功。')
         dictionary = pptxg.getSlideDictionary(prs.slides, [c.name for c in self.char_list], {})
         try:
             pptxg.generatePreFromLog(scene,dictionary,prs,name, save_fp, d_replacer, font_change=font_change, font_size=font_size, font_bold=font_bold, font_name=font_name)
-        except:
-            msgBox = QMessageBox(QMessageBox.NoIcon, '错误', '生成失败。')
+        except Exception as e:
+            msgBox = QMessageBox(QMessageBox.NoIcon, '错误', '生成失败。\n' + str(e))
             msgBox.exec()
             return None
         else:
@@ -562,12 +488,5 @@ class MainWindow(QMainWindow):
 
 
 
-app = QApplication(sys.argv)
-mainwindow = MainWindow()
-widget = QtWidgets.QStackedWidget()
-widget.addWidget(mainwindow)
-widget.setFixedSize(510,930)
-widget.show()
-sys.exit(app.exec_())
 
 

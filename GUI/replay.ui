@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>跑团log文件对应ppt生成器</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QLabel" name="char_fp_label">
