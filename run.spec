@@ -4,11 +4,11 @@ block_cipher = None
 
 
 a = Analysis(['run.py'],
-             pathex=['D:\\TRPG\\TRPG_replay_video_generator', 'D:\\TRPG\\TRPG_replay_video_generator\\GUI', 'D:\\TRPG\\TRPG_replay_video_generator\\Core'],
+             pathex=['.', './GUI', './Core'],
              binaries=[],
              datas=[],
              hiddenimports=['PyQt5.sip','pptx','six'],
-             hookspath=['D:\\TRPG\\backup'],
+             hookspath=['.'],
              runtime_hooks=[],
              excludes=['scipy'],
              win_no_prefer_redirects=False,
@@ -30,5 +30,5 @@ exe = EXE(pyz,
           upx=True,
           upx_exclude=[],
           runtime_tmpdir=None,
-          icon = 'D:\TRPG\TRPG_replay_video_generator\icon.ico',
+          icon = './icon.ico',
           console=False )
