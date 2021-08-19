@@ -141,21 +141,3 @@ def findCharacter(lineString, characters, char_fp, txt_format='qq', header=defau
     else:
         print("无法识别的txt_format，请从qq, colored 以及 ldn 中选择。其他格式暂时无法识别。")
         return (None, None)
-
-# def ldnReform(scene, savefp):
-#     for line in scene.lines:
-        
-
-# kp = Log.KP('KP','(370081332)')
-# zhima = Log.PL('芝麻','<tseirp@qq.com>', '阿恬')
-# qiuqiu = Log.PL('球球','', '蓝蓝')
-# momo = Log.PL('momo','','Syin')
-# touzi = Log.Dice('骰子')
-# print('【初始创建完毕】\n\n')
-
-# saveCharacterList([kp, zhima, qiuqiu, momo, touzi])
-# charlist = getCharacterList()
-# filepath = 'C:/Users/44418/Desktop/TRPG/liang.txt'
-# lines = readFromTxt(filepath, charlist, txt_format='ldn', encoding='GBK')
-# scene = Log.Scene(lines, characters=charlist)
-# print(scene.lines)

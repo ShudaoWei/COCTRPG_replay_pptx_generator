@@ -2,19 +2,6 @@ import TxtToLog as ttl
 import Log
 import re
 
-txt = 'D:/QQreceived/444187443/FileRecv/血月01[整理完+已核对修改].txt'
-# txt = 'D:/QQreceived/444187443/FileRecv/test.txt'
-dice = Log.Dice('玛丽安')
-lines = ttl.readFromTxt(txt,[dice],'D:/TRPG/TRPG_replay_video_generator/Core/test.json', encoding='UTF-8',txt_format='ldn')
-text_fp = 'D:/TRPG/TRPG_replay_video_generator/Core/ldn生成.txt'
-
-dice_voice = '<mp3#>D:\Downloads\音效\音效\骰子.mp3<*><100=100><0:0-0:1><#mp3>'
-success_voice = '<mp3#>D:\Downloads\音效\音效\成功.wav<*><50=100><0:0-0:0><#mp3>'
-big_success_voice = '<mp3#>D:\Downloads\音效\音效\大成功.wav<*><10=100><0:0-0:1><#mp3>'
-fail_voice = '<mp3#>D:\Downloads\音效\音效\失败.wav<*><20=100><0:0-0:0><#mp3>'
-big_fail_voice = '<mp3#>D:\Downloads\音效\音效\大失败.wav<*><10=100><0:0-0:1><#mp3>'
-
-dict_v = {'dice': dice_voice, 'success':success_voice, 'successSpecial':big_success_voice, 'fail':fail_voice, 'failSpecial': big_fail_voice}
 # 内置 默认修改内容
 dict_f_default = {'re':True, r'hhh*': '哈哈哈', r'233+': '二三三', r'\(*[xX]+':''}
 
@@ -76,5 +63,3 @@ def filterCustomize(content, dict_filter):
                 continue
             content = content.replace(key, dict_filter[key])
     return content
-
-linesToLDN(lines, text_fp, dict_v, {r'[图片]': '', r'\.jpg':'点j p g', r'和': '合'})

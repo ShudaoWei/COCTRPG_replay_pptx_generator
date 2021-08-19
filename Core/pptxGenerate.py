@@ -59,9 +59,7 @@ def copy_slide(pres,pres1,index):
         dest.shapes._spTree.insert_element_before(newel, 'p:extLst')
         # print('正在复制形状：', shp.name)
         for key, value in six.iteritems(source.part.rels):
-                    # Make sure we don't copy a notesSlide relation as that won't exist
-                # print('key:   ', key)
-                # print('value:   ', value)
+                # Make sure we don't copy a notesSlide relation as that won't exist
                 if not "notesSlide" in value.reltype:
                         # if shp.name == '图片 8':
                         #     print('value.reltype: ', value.reltype)
@@ -111,18 +109,6 @@ def findCharPic(shapes, org_path, bias):
                 return shape
     return None
 
-# ------------------------------------------
-# ===  立绘更换测试  ===
-# prs = Presentation('恐怖医院模板.pptx')
-# bias = 1
-# path_org = '林檎普通微笑表情.png'
-# path_new = '林檎失控表情.png'
-# old_pic = findCharPic(prs.slides[4].shapes, path_org, bias)
-# x, y, cx, cy= old_pic.left, old_pic.top, old_pic.width, old_pic.height
-# new_pic = prs.slides[4].shapes.add_picture(path_new, x,y, cx, cy)
-# old_pic._element.addnext(new_pic._element)
-# old_pic._element.getparent().remove(old_pic._element)
-# prs.save('result.pptx')
 
 # 立绘替换
 def changePic(new_fp, org_fp, slide, bias):
@@ -205,57 +191,3 @@ def replace_paragraph_text_retaining_initial_formatting(paragraphs, new_text):
         p.remove(run._r)
     paragraph.runs[0].text = new_text
 
-# prs = Presentation('model.pptx')
-
-# pre = ''
-# for s in prs.slides:
-#     for shape in s.shapes:
-#         if hasattr(shape, "text"):
-#             a = shape.text
-#             shape.text = 'what???'
-#             a = 'abcde'
-#             print('yes')
-
-# d_replacer = '這一周也不例外，你们刚刚从家里，神社，公园来到集会地点，现在距离集会开始還有一段时間，你们可以自由交流一下'
-# kp = Log.KP('KP','')
-# zhima = Log.PL('芝麻','', '阿恬')
-# qiuqiu = Log.PL('球球','', '蓝蓝')
-# momo = Log.PL('momo','','Syin')
-# touzi = Log.Dice('骰子')
-
-# path_characters = 'D:/TRPG/TRPG_replay_video_generator/charlist.json'
-# ttl.saveCharacterList([kp, zhima, qiuqiu, momo, touzi], path_characters)
-# charlist = ttl.getCharacterList(path_characters)
-# apple =  Log.PL('林檎', '', 'EE')
-# apple.set_imgpath('D:/TRPG/TRPG_replay_video_generator/林檎')
-# paths = apple.imges
-# d = {}
-# for path in paths:
-#     if path.find('失控') != -1:
-#         d[path] = ['愤怒的']
-# apple.set_dictionary(d)
-# apple.original_img = 2
-# charlist = [Log.KP('火火', ''), apple]
-# txt_fp = 'D:/TRPG/TRPG_replay_video_generator/医院05.txt'
-# txt_format = 'ldn'
-# txt_encoding = 'GBK'
-# lines = ttl.readFromTxt(txt_fp, charlist,path_characters, txt_format=txt_format, encoding=txt_encoding)
-# scene = Log.Scene(lines, characters=charlist)
-# model_ppt_fp = '恐怖医院模板.pptx'
-# prs = Presentation(model_ppt_fp)
-# dictionary = getSlideDictionary(prs.slides, [c.name for c in charlist], {})
-# name = '123'
-# fp = 'C:/Users/44418/Desktop'
-# font_change = True
-# font_size = 20
-# font_bold = True
-# font_name = '清松手寫體1'
-# d_replacer = '我有自行车'
-# generatePreFromLog(scene,model_ppt_fp,name, fp, d_replacer)
-
-
-# for slide in prs.slides:
-#     print(pre + ' 【start slide】\n')
-#     print(checkrecursivelyfortext(slide.shapes,[], pre))
-#     print(pre + '【end slide】')
-#     print(' ')
