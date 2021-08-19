@@ -2,10 +2,13 @@
 #----------TRPG only------------#
 __tests__/
 .vscode/
-*.txt
 *.pptx
 *.ico
 *.png
+*.html
+*.toc
+*.pyz
+*.zip
 
 #----------python------------#
 # Byte-compiled / optimized / DLL files
@@ -19,7 +22,6 @@ __pycache__/
 # Distribution / packaging
 .Python
 build/
-build/run/
 develop-eggs/
 dist/
 downloads/
