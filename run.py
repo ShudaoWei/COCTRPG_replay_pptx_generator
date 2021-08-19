@@ -5,8 +5,5 @@ from PyQt5 import QtWidgets
 
 app = QApplication(sys.argv)
 mainwindow = ui.MainWindow()
-widget = QtWidgets.QStackedWidget()
-widget.addWidget(mainwindow)
-widget.setFixedSize(510,930)
-widget.show()
+mainwindow.show()
 sys.exit(app.exec_())

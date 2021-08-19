@@ -15,6 +15,7 @@ re_colored_id = r'<(.*)>'
 
 re_ldn_id = r'\[(.*)\]'
 
+re_dice = r'D[0-9]+=[0-9]+/[0-9]+'
 
 
 # obj2dic的 code 来源：https://blog.csdn.net/u012410724/article/details/51259761
@@ -106,8 +107,9 @@ def findCharacter(lineString, characters, char_fp, txt_format='qq', header=defau
         if not is_userline:
             return (None, None)
         qnum = is_userline.group(5)
+        qid = is_userline.group(4)
         for c in characters:
-            if c.qNum == qnum:
+            if c.qNum == qnum or qid.replace(' ','').find(c.PLid) != -1:
                 return (c,None)
     elif txt_format == 'colored':
         is_userline = re.search(re_colored_id + r'(.*)', lineString)
@@ -116,7 +118,7 @@ def findCharacter(lineString, characters, char_fp, txt_format='qq', header=defau
         name = is_userline.group(1)
         cline = is_userline.group(2)
         for c in characters:
-            if c.name == name:
+            if (c.is_KP and c.PLid == name) or c.name == name:
                 return (c, cline)
         character = Log.Character(name)
         characters.append(character)
@@ -130,7 +132,7 @@ def findCharacter(lineString, characters, char_fp, txt_format='qq', header=defau
         name = is_userline.group(1)
         cline = is_userline.group(2)
         for c in characters:
-            if c.name == name:
+            if (c.is_KP and c.PLid == name) or c.name == name:
                 return (c, cline)
         character = Log.Character(name)
         characters.append(character)
@@ -139,6 +141,10 @@ def findCharacter(lineString, characters, char_fp, txt_format='qq', header=defau
     else:
         print("无法识别的txt_format，请从qq, colored 以及 ldn 中选择。其他格式暂时无法识别。")
         return (None, None)
+
+# def ldnReform(scene, savefp):
+#     for line in scene.lines:
+        
 
 # kp = Log.KP('KP','(370081332)')
 # zhima = Log.PL('芝麻','<tseirp@qq.com>', '阿恬')

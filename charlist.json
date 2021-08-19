@@ -1,0 +1,101 @@
+[
+    {
+        "__class__": "KP",
+        "__module__": "Log",
+        "name": "KP",
+        "imges": [],
+        "imgdir": "",
+        "is_dice": false,
+        "is_NPC": false,
+        "is_KP": true,
+        "is_PL": false,
+        "qNum": "",
+        "PLid": "\u706b\u706b"
+    },
+    {
+        "__class__": "KP",
+        "__module__": "Log",
+        "name": "KP",
+        "imges": [],
+        "imgdir": "",
+        "is_dice": false,
+        "is_NPC": false,
+        "is_KP": true,
+        "is_PL": false,
+        "qNum": "",
+        "PLid": "\u7c89\u7c89"
+    },
+    {
+        "__class__": "PL",
+        "__module__": "Log",
+        "name": "\u6797\u6a8e",
+        "imges": [],
+        "imgdir": "",
+        "is_dice": false,
+        "is_NPC": false,
+        "is_KP": false,
+        "is_PL": true,
+        "qNum": "",
+        "PLid": "EE"
+    },
+    {
+        "__class__": "PL",
+        "__module__": "Log",
+        "name": "\u7530\u606c",
+        "imges": [],
+        "imgdir": "",
+        "is_dice": false,
+        "is_NPC": false,
+        "is_KP": false,
+        "is_PL": true,
+        "qNum": "",
+        "PLid": "\u963f\u606c"
+    },
+    {
+        "__class__": "PL",
+        "__module__": "Log",
+        "name": "\u6bdb\u6bdb",
+        "imges": [],
+        "imgdir": "",
+        "is_dice": false,
+        "is_NPC": false,
+        "is_KP": false,
+        "is_PL": true,
+        "qNum": "",
+        "PLid": "Syin"
+    },
+    {
+        "__class__": "PL",
+        "__module__": "Log",
+        "name": "\u949f\u4e3d\u840d",
+        "imges": [],
+        "imgdir": "",
+        "is_dice": false,
+        "is_NPC": false,
+        "is_KP": false,
+        "is_PL": true,
+        "qNum": "",
+        "PLid": "\u517d\u517d"
+    },
+    {
+        "__class__": "Dice",
+        "__module__": "Log",
+        "name": "\u739b\u4e3d\u5b89",
+        "imges": [],
+        "imgdir": "",
+        "is_dice": true,
+        "is_NPC": false,
+        "is_KP": false,
+        "is_PL": false,
+        "results": {
+            "__class__": "DiceResult",
+            "__module__": "Log",
+            "reg_success": "\u6210\u529f",
+            "hard_success": "\u56f0\u96be\u6210\u529f",
+            "extreme_success": "\u6781\u96be\u6210\u529f",
+            "special_success": "\u5927\u6210\u529f",
+            "reg_failure": "\u5931\u8d25",
+            "special_failure": "\u5927\u5931\u8d25"
+        }
+    }
+]

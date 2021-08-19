@@ -15,6 +15,8 @@ class Character(object):
         self.is_NPC = True
         self.is_KP = False
         self.is_PL = False
+        self.imges_dict = {}
+        self.original_img = 0
         for k, w in kw.items():
             setattr(self, k, w)
         print("创建角色：", name)
@@ -22,14 +24,19 @@ class Character(object):
     def set_imgpath(self, imgdir):
         self.imgdir = imgdir
         files = os.listdir(imgdir)
-        self.imges = [os.path.join(imgdir, f) for f in files]
+        self.imges = [os.path.join(imgdir, f) for f in files 
+                      if os.path.splitext(f)[-1] in ['.jpg', '.jpeg', '.png', '.bmp', '.gif']]
+        for img in self.imges:
+            self.imges_dict[img] = []
     
     def set_KP(self, qNum):
         self.is_KP = True
         self.is_NPC = False
         self.__class__ = KP
         self.qNum = qNum
-        print("玩家 " + self.name + " 为守密人。")
+        self.PLid = getattr(self, 'PLid', self.name)
+        self.name = 'KP'
+        print("玩家 " + self.PLid + " 为守密人。")
 
     def set_PL(self, qNum, PLid):
         self.is_PL = True
@@ -67,6 +74,33 @@ class Character(object):
             return 'PL'
         return None
 
+    def get_filenames(self):
+        return [os.path.basename(fp) for fp in self.imges]
+    
+    def add_dictionary(self, pic_dict):
+        for key in pic_dict:
+            key_fp = os.path.join(self.imgdir, key)
+            # 拼接两个
+            new = getattr(self.imges_dict, key_fp, []) + [word for word in pic_dict[key] if word]
+            # 去重
+            self.imges_dict[key] = list(set(new))
+
+    def set_dictionary(self, pic_dict):
+        for key in pic_dict:
+            key_fp = os.path.join(self.imgdir, key)
+            # 只取重新定义的列表
+            new = [word for word in pic_dict[key] if word]
+            # 去重
+            self.imges_dict[key_fp] = list(set(new))
+    
+    # def set_original(self, fn):
+    #     for index, filepath in self.imges:
+    #         if fn == os.path.basename(filepath):
+    #             self.original_img = index
+    #             return index
+    #     return None
+
+
     
 
 
@@ -75,6 +109,7 @@ class Dice(Character):
         Character.__init__(self, name)
         self.is_dice = True
         self.is_NPC = False
+        self.results = DiceResult()
         for k, w in kw.items():
             setattr(self, k, w)
         print('这是个骰子。\n')
@@ -122,7 +157,14 @@ class KP(Player):
         result = Character.__repr__(self) + ' 玩家id： ' + self.PLid + '  该玩家是KP。'
         result += "  qq号：" + str(self.qNum)
         return result
-
+    
+    def set_PL(self, qNum, name):
+        self.is_PL = True
+        self.is_NPC = False
+        self.__class__ = PL
+        self.qNum = qNum
+        self.name = name
+        print("设置 " + self.PLid + "(角色：" + self.name + ") 为PL。")
 
 # character: Character (发言人)
 # content: String (发言内容)
@@ -134,12 +176,22 @@ class Line(object):
         self.state = ''
         for k, w in kw.items():
             setattr(self, k, w)
-    
+        line = content.replace(' ','').replace('\n', '')
+        self.pic_fp = self._find_char_img(line, character.imges_dict)
+
+    def _find_char_img(self, line, imges_dict):
+        for key in imges_dict:
+            words = imges_dict[key]
+            for word in words:
+                if word in line:
+                    return key
+        return None
+
     def set_State(self, statenum):
         try:
             self.state = self.character.imges[statenum]
         except ValueError:
-            print('image set is empty.')
+            print('立绘列表为空。')
 
     def __repr__(self):
         result = self.character.name + self.state
@@ -151,11 +203,30 @@ class Line(object):
 # background: String(dir) (场景背景 地址)
 # characters: [Character] (场景内人员列表)
 class Scene(object):
-    def __init__(self, lines=[], **kw):
+    def __init__(self, lines=[], characters=[], **kw):
         self.lines = lines
         self.background = ''
         temp = []
-        self.characters = [temp.append(l.character) for l in lines if not l.character in temp] 
+        self.characters = characters 
 
+        for k, w in kw.items():
+            setattr(self, k, w)
+
+    def countKP(self):
+        count = 0
+        for char in self.characters:
+            if char.is_KP:
+                count += 1
+        return count
+
+
+class DiceResult(object):
+    def __init__(self, **kw):
+        self.reg_success = '成功'
+        self.hard_success = '困难成功'
+        self.extreme_success = '极难成功'
+        self.special_success = '大成功'
+        self.reg_failure = '失败'
+        self.special_failure = '大失败'
         for k, w in kw.items():
             setattr(self, k, w)
